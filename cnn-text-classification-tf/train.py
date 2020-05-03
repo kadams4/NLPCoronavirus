@@ -13,9 +13,14 @@ from tensorflow.contrib import learn
 # ==================================================
 
 # Data loading params
-tf.flags.DEFINE_float("dev_sample_percentage", .1, "Percentage of the training data to use for validation")
-tf.flags.DEFINE_string("positive_data_file", "./data/review-polaritydata/review-polarity.pos", "Data source for the positive data.")
-tf.flags.DEFINE_string("negative_data_file", "./data/review-polaritydata/review-polarity.neg", "Data source for the negative data.")
+tf.flags.DEFINE_float("dev_sample_percentage", .2, "Percentage of the training data to use for validation")
+tf.flags.DEFINE_string("data_directory", "./NLPCoronavirus/cnn-text-classification-tf/data/", "Data source for the data.")
+tf.flags.DEFINE_string("positive_data_file", "review-polaritydata/review-polarity.pos", "Data File for the positive data.")
+tf.flags.DEFINE_string("negative_data_file", "review-polaritydata/review-polarity.neg", "Data File for the negative data.")
+tf.flags.DEFINE_string("logs_directory", "./tmp/log/", "Log destination")
+
+#Pretrained weights
+tf.flags.DEFINE_string("pretrained_weights", "", "Pretrained weights file")
 
 # Model Hyperparameters
 tf.flags.DEFINE_integer("embedding_dim", 128, "Dimensionality of character embedding (default: 128)")
@@ -109,7 +114,7 @@ def train(x_train, y_train, vocab_processor, x_dev, y_dev):
 
             # Output directory for models and summaries
             timestamp = str(int(time.time()))
-            out_dir = os.path.abspath(os.path.join(os.path.curdir, "runs", timestamp))
+            out_dir = os.path.abspath(os.path.join(os.path.curdir, FLAGS.logs_directory, timestamp))
             print("Writing to {}\n".format(out_dir))
 
             # Summaries for loss and accuracy
