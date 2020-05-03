@@ -14,7 +14,7 @@ from tensorflow.contrib import learn
 
 # Data loading params
 tf.flags.DEFINE_float("dev_sample_percentage", .2, "Percentage of the training data to use for validation")
-tf.flags.DEFINE_string("data_directory", "./NLPCoronavirus/cnn-text-classification-tf/data/", "Data source for the data.")
+tf.flags.DEFINE_string("data_directory", "./NLPCoronavirus/cnn_text_classification_tf/data/", "Data source for the data.")
 tf.flags.DEFINE_string("positive_data_file", "review-polaritydata/review-polarity.pos", "Data File for the positive data.")
 tf.flags.DEFINE_string("negative_data_file", "review-polaritydata/review-polarity.neg", "Data File for the negative data.")
 tf.flags.DEFINE_string("logs_directory", "./tmp/log/", "Log destination")
