@@ -17,7 +17,7 @@ tf.flags.DEFINE_float("dev_sample_percentage", .2, "Percentage of the training d
 tf.flags.DEFINE_string("data_directory", "./NLPCoronavirus/cnn_text_classification_tf/data/", "Data source for the data.")
 tf.flags.DEFINE_string("positive_data_file", "review-polaritydata/review-polarity.pos", "Data File for the positive data.")
 tf.flags.DEFINE_string("negative_data_file", "review-polaritydata/review-polarity.neg", "Data File for the negative data.")
-tf.flags.DEFINE_string("logs_directory", "/tmp/log/", "Log destination")
+tf.flags.DEFINE_string("logs_directory", "./runs/", "Log destination")
 tf.flags.DEFINE_string("checkpoint_id", "0", "Checkpoint ID")
 
 #Pretrained weights
