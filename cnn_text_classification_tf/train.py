@@ -98,6 +98,8 @@ def train(x_train, y_train, vocab_processor, x_dev, y_dev):
                 num_filters=FLAGS.num_filters,
                 l2_reg_lambda=FLAGS.l2_reg_lambda)
 
+
+
             # Define Training procedure
             global_step = tf.Variable(0, name="global_step", trainable=False)
             optimizer = tf.train.AdamOptimizer(FLAGS.lr)
@@ -140,7 +142,9 @@ def train(x_train, y_train, vocab_processor, x_dev, y_dev):
                 os.makedirs(checkpoint_dir)
             saver = tf.train.Saver(tf.global_variables(), max_to_keep=FLAGS.num_checkpoints)
 
-            # Write vocabulary
+            if FLAGS.pretrained_weights:
+                saver.restore(sess, FLAGS.pretrained_weights)
+
             vocab_processor.save(os.path.join(out_dir, "vocab"))
 
             # Initialize all variables
