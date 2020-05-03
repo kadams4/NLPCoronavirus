@@ -18,6 +18,7 @@ tf.flags.DEFINE_string("data_directory", "./NLPCoronavirus/cnn_text_classificati
 tf.flags.DEFINE_string("positive_data_file", "review-polaritydata/review-polarity.pos", "Data File for the positive data.")
 tf.flags.DEFINE_string("negative_data_file", "review-polaritydata/review-polarity.neg", "Data File for the negative data.")
 tf.flags.DEFINE_string("logs_directory", "./tmp/log/", "Log destination")
+tf.flags.DEFINE_string("checkpoint_id", "0", "Checkpoint ID")
 
 #Pretrained weights
 tf.flags.DEFINE_string("pretrained_weights", "", "Pretrained weights file")
@@ -114,7 +115,7 @@ def train(x_train, y_train, vocab_processor, x_dev, y_dev):
 
             # Output directory for models and summaries
             timestamp = str(int(time.time()))
-            out_dir = os.path.abspath(os.path.join(os.path.curdir, FLAGS.logs_directory, timestamp))
+            out_dir = os.path.abspath(os.path.join(os.path.curdir, FLAGS.logs_directory, FLAGS.checkpoint_id))
             print("Writing to {}\n".format(out_dir))
 
             # Summaries for loss and accuracy
