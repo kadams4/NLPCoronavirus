@@ -23,6 +23,10 @@ tf.flags.DEFINE_string("checkpoint_id", "0", "Checkpoint ID")
 #Pretrained weights
 tf.flags.DEFINE_string("pretrained_weights", "", "Pretrained weights file")
 
+tf.flags.DEFINE_string("all_pos", "./NLPCoronavirus/cnn_text_classification_tf/data/alldata.pos", "Pretrained weights file")
+tf.flags.DEFINE_string("all_data", "./NLPCoronavirus/cnn_text_classification_tf/data/alldata.all", "Pretrained weights file")
+
+
 # Model Hyperparameters
 tf.flags.DEFINE_integer("embedding_dim", 128, "Dimensionality of character embedding (default: 128)")
 tf.flags.DEFINE_string("filter_sizes", "3,4,5", "Comma-separated filter sizes (default: '3,4,5')")
@@ -55,11 +59,14 @@ def preprocess():
     # Load data
     print("Loading data...")
     x_text, y = data_helpers.load_data_and_labels(FLAGS.positive_data_file, FLAGS.negative_data_file)
+    # x_text, y = data_helpers.load_data_and_labels(FLAGS.all_pos, FLAGS.all_neg)
 
     # Build vocabulary
-    max_document_length = max([len(x.split(" ")) for x in x_text])
+    max_document_length = max([len(x.split(" ")) for x in list(open(FLAGS.all_data, "r", encoding='utf-8').readlines())])
     vocab_processor = learn.preprocessing.VocabularyProcessor(max_document_length)
-    x = np.array(list(vocab_processor.fit_transform(x_text)))
+    vocab_processor.fit_transform(list(open(FLAGS.all_data, "r", encoding='utf-8').readlines()))
+    x = np.array(list(vocab_processor.transform(x_text)))
+    #
 
     # Randomly shuffle data
     np.random.seed(10)

@@ -20,9 +20,11 @@ tf.flags.DEFINE_string("positive_data_file", "review-polaritydata/review-polarit
 tf.flags.DEFINE_string("negative_data_file", "review-polaritydata/review-polarity.neg", "Data File for the negative data.")
 tf.flags.DEFINE_string("logs_directory", "./runs/", "Log destination")
 
+tf.flags.DEFINE_string("vocab_directory", "./runs/base_review_20/checkpoints/", "vocab destination")
+
 
 # Eval Parameters
-tf.flags.DEFINE_integer("batch_size", 64, "Batch Size (default: 64)")
+tf.flags.DEFINE_integer("batch_size", 1, "Batch Size (default: 64)")
 tf.flags.DEFINE_string("checkpoint_dir", "", "Checkpoint directory from training run")
 tf.flags.DEFINE_boolean("eval_train", False, "Evaluate on all training data")
 
@@ -47,7 +49,7 @@ else:
     y_test = [1, 0]
 
 # Map data into vocabulary
-vocab_path = os.path.join(FLAGS.checkpoint_dir, "..", "vocab")
+vocab_path = os.path.join(FLAGS.vocab_directory, "..", "vocab")
 vocab_processor = learn.preprocessing.VocabularyProcessor.restore(vocab_path)
 x_test = np.array(list(vocab_processor.transform(x_raw)))
 
