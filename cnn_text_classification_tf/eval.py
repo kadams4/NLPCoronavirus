@@ -95,7 +95,7 @@ if y_test is not None:
     print("Total number of test examples: {}".format(len(y_test)))
     print("Accuracy: {:g}".format(correct_predictions/float(len(y_test))))
     print("F1 Score: " + str(f1_score(y_test, all_predictions)))
-    print("Confusion Matrix tn, fp, fn, tp = " + confusion_matrix(y_test, all_predictions).ravel())
+    print("Confusion Matrix tn, fp, fn, tp = " + str(confusion_matrix(y_test, all_predictions).ravel()))
 
 # Save the evaluation to a csv
 predictions_human_readable = np.column_stack((np.array(x_raw), all_predictions))
