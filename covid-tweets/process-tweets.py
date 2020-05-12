@@ -43,7 +43,7 @@ for filename in filenames:
         f.close()
 
     for (df, suffix) in [(positive, 'pos'), (neutral, 'neu'), (negative, 'neg')]:
-        train, test = train_test_split(df, test_size=0.1)
+        train, test = train_test_split(df, test_size=0.2)
 
-        clean_and_write(train, "Split/"+filename+'-train.'+suffix)
-        clean_and_write(test, "Split/"+filename+'-test.'+suffix)
+        clean_and_write(train, "Split/"+filename+'-train-70.'+suffix)
+        clean_and_write(test, "Split/"+filename+'-test-30.'+suffix)

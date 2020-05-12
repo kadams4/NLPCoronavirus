@@ -2,7 +2,7 @@ import pandas as pd
 
 root = "Split/"
 
-types = ["train", "test"]
+types = ["train-70", "test-30"]
 
 for type in types:
     filenames = ["2020-03-"+str(i)+"-Labels-"+type for i in range(12, 29)]
