@@ -94,7 +94,7 @@ if y_test is not None:
     correct_predictions = float(sum(all_predictions == y_test))
     print("Total number of test examples: {}".format(len(y_test)))
     print("Accuracy: {:g}".format(correct_predictions/float(len(y_test))))
-    print("F1 Score: " + f1_score(y_test, all_predictions))
+    print("F1 Score: " + str(f1_score(y_test, all_predictions)))
     print("Confusion Matrix tn, fp, fn, tp = " + confusion_matrix(y_test, all_predictions).ravel())
 
 # Save the evaluation to a csv
