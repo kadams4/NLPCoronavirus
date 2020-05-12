@@ -87,11 +87,15 @@ with graph.as_default():
             batch_predictions = sess.run(predictions, {input_x: x_test_batch, dropout_keep_prob: 1.0})
             all_predictions = np.concatenate([all_predictions, batch_predictions])
 
+from sklearn.metrics import confusion_matrix, f1_score
+
 # Print accuracy if y_test is defined
 if y_test is not None:
     correct_predictions = float(sum(all_predictions == y_test))
     print("Total number of test examples: {}".format(len(y_test)))
     print("Accuracy: {:g}".format(correct_predictions/float(len(y_test))))
+    print("F1 Score: " + f1_score(y_test, all_predictions))
+    print("Confusion Matrix tn, fp, fn, tp = " + confusion_matrix(y_test, all_predictions).ravel())
 
 # Save the evaluation to a csv
 predictions_human_readable = np.column_stack((np.array(x_raw), all_predictions))
